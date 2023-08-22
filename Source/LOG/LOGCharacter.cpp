@@ -7,6 +7,7 @@
 #include "Components/CapsuleComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "LOG/00_Character/00_Component/StatusComponent.h"
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -14,6 +15,8 @@
 
 ALOGCharacter::ALOGCharacter()
 {
+	StatusComponent = CreateDefaultSubobject<UStatusComponent>(TEXT("StatusComponent"));
+
 	// Character doesnt have a rifle at start
 	bHasRifle = false;
 	

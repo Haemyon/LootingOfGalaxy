@@ -43,6 +43,9 @@ class ALOGCharacter : public ACharacter
 public:
 	ALOGCharacter();
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	class UStatusComponent* StatusComponent;
+
 protected:
 	virtual void BeginPlay();
 
