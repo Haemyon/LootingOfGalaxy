@@ -7,6 +7,11 @@
 #include "InputActionValue.h"
 #include "LOGCharacter.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangedHP, class UStatusComponent*, statComp);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangedSP, class UStatusComponent*, statComp);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangedMP, class UStatusComponent*, statComp);
+
+
 class UInputComponent;
 class USkeletalMeshComponent;
 class USceneComponent;
@@ -43,8 +48,28 @@ class ALOGCharacter : public ACharacter
 public:
 	ALOGCharacter();
 
+	UPROPERTY(BlueprintAssignable)
+	FOnChangedHP OnChangedHP;
+	UPROPERTY(BlueprintAssignable)
+	FOnChangedSP OnChangedSP;
+	UPROPERTY(BlueprintAssignable)
+	FOnChangedMP OnChangedMP;
+
+
+public:
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	class UStatusComponent* StatusComponent;
+
+	UStatusComponent* GetStatusComponent() { return StatusComponent; }
+
+protected:
+	UFUNCTION()
+	virtual void OnChangedHPEvent(class UStatusComponent* statComp) {}
+	UFUNCTION()
+	virtual void OnChangedSPEvent(class UStatusComponent* statComp) {}
+	UFUNCTION()
+	virtual void OnChangedMPEvent(class UStatusComponent* statComp) {}
 
 protected:
 	virtual void BeginPlay();

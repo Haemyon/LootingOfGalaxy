@@ -1,6 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "LOGCharacter.h"
+
 #include "LOGProjectile.h"
 #include "Animation/AnimInstance.h"
 #include "Camera/CameraComponent.h"
@@ -8,6 +9,8 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "LOG/00_Character/00_Component/StatusComponent.h"
+#include "LOG/00_Character/LOGPlayerController.h"
+#include "LOG/00_Character/01_Widget/MainWidget.h"
 
 
 //////////////////////////////////////////////////////////////////////////

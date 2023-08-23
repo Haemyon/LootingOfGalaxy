@@ -9,17 +9,26 @@
 void UProgressBarWidget::UpdateProgressHP(UStatusComponent* statComp)
 {
 	float per = statComp->GetHP() / statComp->GetMaxHP();
-	ProgressBar_HP->SetPercent(per);
+	if (per != NULL) 
+	{
+		ProgressBar_HP->SetPercent(per);
+	}
 }
 
 void UProgressBarWidget::UpdateProgressSP(UStatusComponent* statComp)
 {
 	float per = statComp->GetSP() / statComp->GetMaxSP();
-	ProgressBar_SP->SetPercent(per);
+	if (per != NULL)
+	{
+		ProgressBar_SP->SetPercent(per);
+	}
 }
 
 void UProgressBarWidget::UpdateProgressMP(UStatusComponent* statComp)
 {
 	float per = statComp->GetMP() / statComp->GetMaxMP();
-	ProgressBar_SP->SetPercent(per);
+	if (per != NULL)
+	{
+		ProgressBar_SP->SetPercent(per);
+	}
 }
