@@ -18,10 +18,10 @@ protected:
 	class UProgressBarWidget* UMG_ProgressBar;
 
 public:
-	UFUNCTION()
-	void UpdateHPPercent(class UStatusComponent* statComp);
-	UFUNCTION()
-	void UpdateSPPercent(class UStatusComponent* statComp);
-	UFUNCTION()
-	void UpdateMPPercent(class UStatusComponent* statComp);
+	//UFUNCTION()
+	//void UpdateHPPercent(class UStatusComponent* statComp);
+	//UFUNCTION()
+	//void UpdateSPPercent(class UStatusComponent* statComp);
+	//UFUNCTION()
+	//void UpdateMPPercent(class UStatusComponent* statComp);
 };
