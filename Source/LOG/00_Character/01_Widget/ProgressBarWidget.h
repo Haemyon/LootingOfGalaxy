@@ -22,7 +22,7 @@ protected:
 	class UProgressBar* ProgressBar_MP;
 
 public:
-	//void UpdateProgressHP(class UStatusComponent* statComp);
-	//void UpdateProgressSP(class UStatusComponent* statComp);
-	//void UpdateProgressMP(class UStatusComponent* statComp);
+	void UpdateProgressHP(class UStatusComponent* statComp);
+	void UpdateProgressSP(class UStatusComponent* statComp);
+	void UpdateProgressMP(class UStatusComponent* statComp);
 };
