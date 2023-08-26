@@ -31,6 +31,10 @@ protected:
 	UPROPERTY(EditAnywhere)
 	float MaxMP = 100;
 
+protected:
+	// Called when the game starts
+	virtual void BeginPlay() override;
+
 public:
 	float GetHP() { return HP; }
 	float GetMaxHP() { return MaxHP; }
@@ -39,9 +43,6 @@ public:
 	float GetMP() { return MP; }
 	float GetMaxMP() { return MaxMP; }
 
-protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;
 
 public:	
 	// Called every frame

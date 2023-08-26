@@ -55,14 +55,6 @@ public:
 	UPROPERTY(BlueprintAssignable)
 	FOnChangedMP OnChangedMP;
 
-
-public:
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	class UStatusComponent* StatusComponent;
-
-	UStatusComponent* GetStatusComponent() { return StatusComponent; }
-
 protected:
 	UFUNCTION()
 	virtual void OnChangedHPEvent(class UStatusComponent* statComp) {}
@@ -70,6 +62,14 @@ protected:
 	virtual void OnChangedSPEvent(class UStatusComponent* statComp) {}
 	UFUNCTION()
 	virtual void OnChangedMPEvent(class UStatusComponent* statComp) {}
+
+public:
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	class UStatusComponent* StatusComponent;
+
+	UStatusComponent* GetStatusComponent() { return StatusComponent; }
+
 
 protected:
 	virtual void BeginPlay();
