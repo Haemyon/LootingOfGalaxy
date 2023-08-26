@@ -5,7 +5,14 @@
 
 #include "LOG/00_Character/00_Component/StatusComponent.h"
 #include "Components/ProgressBar.h"
-#include "Components/TextBlock.h"
+
+void UProgressBarWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
+{
+	ProgressBar_TEST->SetPercent(0.4);
+	ProgressBar_HP->SetPercent(0.1);
+	ProgressBar_SP->SetPercent(0.6);
+	ProgressBar_MP->SetPercent(1);
+}
 
 void UProgressBarWidget::UpdateProgressHP(UStatusComponent* statComp)
 {
