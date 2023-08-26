@@ -5,6 +5,7 @@
 
 #include "LOG/00_Character/00_Component/StatusComponent.h"
 #include "Components/ProgressBar.h"
+#include "Components/TextBlock.h"
 
 void UProgressBarWidget::UpdateProgressHP(UStatusComponent* statComp)
 {

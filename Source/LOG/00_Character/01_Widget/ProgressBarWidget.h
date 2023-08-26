@@ -13,7 +13,7 @@ UCLASS()
 class LOG_API UProgressBarWidget : public UUserWidget
 {
 	GENERATED_BODY()
-protected:
+public:
 	UPROPERTY()
 	class UProgressBar* ProgressBar_HP;
 	UPROPERTY()
@@ -21,8 +21,10 @@ protected:
 	UPROPERTY()
 	class UProgressBar* ProgressBar_MP;
 
+
 public:
 	void UpdateProgressHP(class UStatusComponent* statComp);
 	void UpdateProgressSP(class UStatusComponent* statComp);
 	void UpdateProgressMP(class UStatusComponent* statComp);
+
 };
