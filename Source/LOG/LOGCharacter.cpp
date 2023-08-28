@@ -1,6 +1,6 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
-#include "LOGCharacter.h"
+#include "LOG/LOGCharacter.h"
 
 #include "LOGProjectile.h"
 #include "Animation/AnimInstance.h"

@@ -5,6 +5,7 @@
 
 #include "LOG/00_Character/01_Widget/ProgressBarWidget.h"
 
+
 void UMainWidget::UpdateHPPercent(UStatusComponent* statComp)
 {
 	UMG_ProgressBar->UpdateProgressHP(statComp);

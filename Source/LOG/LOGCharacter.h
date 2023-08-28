@@ -7,10 +7,9 @@
 #include "InputActionValue.h"
 #include "LOGCharacter.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangedHP, UStatusComponent*, statComp);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangedSP, UStatusComponent*, statComp);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangedMP, UStatusComponent*, statComp);
-
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangedHP, class UStatusComponent*, statComp);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangedSP, class UStatusComponent*, statComp);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangedMP, class UStatusComponent*, statComp);
 
 class UInputComponent;
 class USkeletalMeshComponent;
@@ -51,9 +50,9 @@ public:
 	UPROPERTY(BlueprintAssignable)
 	FOnChangedHP OnChangedHP;
 	UPROPERTY(BlueprintAssignable)
-	FOnChangedSP OnChangedSP;
+	FOnChangedHP OnChangedSP;
 	UPROPERTY(BlueprintAssignable)
-	FOnChangedMP OnChangedMP;
+	FOnChangedHP OnChangedMP;
 
 protected:
 	UFUNCTION()

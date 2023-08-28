@@ -13,6 +13,7 @@ UCLASS()
 class LOG_API UMainWidget : public UUserWidget
 {
 	GENERATED_BODY()
+
 protected:
 	UPROPERTY()
 	class UProgressBarWidget* UMG_ProgressBar;

@@ -26,8 +26,11 @@ public:
 	void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
 
 public:
+	UFUNCTION()
 	void UpdateProgressHP(class UStatusComponent* statComp);
+	UFUNCTION()
 	void UpdateProgressSP(class UStatusComponent* statComp);
+	UFUNCTION()
 	void UpdateProgressMP(class UStatusComponent* statComp);
 
 };

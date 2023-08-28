@@ -2,9 +2,9 @@
 
 #include "LOG/00_Character/LOGPlayerController.h"
 
+#include "LOG/LOGCharacter.h"
 #include "LOG/00_Character/01_Widget/MainWidget.h"
 #include "LOG/00_Character/00_Component/StatusComponent.h"
-#include "LOG/LOGCharacter.h"
 
 void ALOGPlayerController::OnPossess(APawn* aPawn)
 {
@@ -25,29 +25,13 @@ void ALOGPlayerController::OnPossess(APawn* aPawn)
 			if (player != nullptr)
 			{
 				UE_LOG(LogTemp, Warning, TEXT("Set player"));
-
 				player->OnChangedHP.AddUniqueDynamic(MainWidget, &UMainWidget::UpdateHPPercent);
 				player->OnChangedSP.AddUniqueDynamic(MainWidget, &UMainWidget::UpdateSPPercent);
 				player->OnChangedMP.AddUniqueDynamic(MainWidget, &UMainWidget::UpdateMPPercent);
-				
-				if (player->OnChangedHP.IsBound() && player->OnChangedSP.IsBound()) 
-				{
-					UE_LOG(LogTemp, Warning, TEXT("OnChangedHP is Bound"));
-					if (!player->GetStatusComponent())
-					{
-						UE_LOG(LogTemp, Error, TEXT("StatusComponent is Not Found"));
-					}
-					UE_LOG(LogTemp, Log, TEXT("\n-----------Player Status----------\nHP : %f\nSP : %f\nMP : %f"), 
-						player->GetStatusComponent()->GetHP(), player->GetStatusComponent()->GetSP(),
-						player->GetStatusComponent()->GetMP());
-					player->OnChangedHP.Broadcast(player->GetStatusComponent());
-					player->OnChangedSP.Broadcast(player->GetStatusComponent());
-					player->OnChangedMP.Broadcast(player->GetStatusComponent());
-				}
-				else
-				{
-					UE_LOG(LogTemp, Error, TEXT("OnChangedHP is Not Bound"));
-				}
+
+				MainWidget->UpdateHPPercent(player->GetStatusComponent());
+				MainWidget->UpdateSPPercent(player->GetStatusComponent());
+				MainWidget->UpdateMPPercent(player->GetStatusComponent());
 			}
 		}
 		else {
