@@ -13,6 +13,7 @@ class ALOGGameMode : public AGameModeBase
 
 public:
 	ALOGGameMode();
+
 };
 
 

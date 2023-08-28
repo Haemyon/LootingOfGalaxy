@@ -31,6 +31,18 @@ protected:
 	UPROPERTY(EditAnywhere)
 	float MaxMP = 100;
 
+	UPROPERTY(EditAnywhere)
+	float EXP = 0;
+	UPROPERTY(EditAnywhere)
+	float LV = 1;
+	UPROPERTY(EditAnywhere)
+	float TalentPoint = 0;
+
+	UPROPERTY(EditAnywhere)
+	float Money = 0;
+	UPROPERTY(EditAnywhere)
+	float Cash = 0;
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -42,6 +54,11 @@ public:
 	float GetMaxSP() { return MaxSP; }
 	float GetMP() { return MP; }
 	float GetMaxMP() { return MaxMP; }
+	float GetEXP() { return EXP; }
+	float GetLV() { return LV; }
+	float GetTalentPoint() { return TalentPoint; }
+	float GetMoney() { return Money; }
+	float GetCash() { return Cash; }
 
 
 public:	

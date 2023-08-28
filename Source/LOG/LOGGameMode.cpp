@@ -3,6 +3,7 @@
 #include "LOGGameMode.h"
 #include "LOGCharacter.h"
 #include "UObject/ConstructorHelpers.h"
+#include "LOG/01_DataTable/LevelDataTable.h"
 
 ALOGGameMode::ALOGGameMode()
 	: Super()
