@@ -11,6 +11,7 @@
 #include "LOG/00_Character/00_Component/StatusComponent.h"
 #include "LOG/00_Character/LOGPlayerController.h"
 #include "LOG/00_Character/01_Widget/MainWidget.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -26,10 +27,10 @@ ALOGCharacter::ALOGCharacter()
 	bSprint = false;
 
 	bCrouch = false;
-	
+
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(55.f, 96.0f);
-		
+
 	// Create a CameraComponent	
 	FirstPersonCameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("FirstPersonCamera"));
 	FirstPersonCameraComponent->SetupAttachment(GetCapsuleComponent());
@@ -100,7 +101,7 @@ void ALOGCharacter::Move(const FInputActionValue& Value)
 		AddMovementInput(GetActorForwardVector(), MovementVector.Y);
 		AddMovementInput(GetActorRightVector(), MovementVector.X);
 
-		
+
 		//UE_LOG(LogTemp, Log, TEXT("Movement"));
 	}
 }
@@ -123,11 +124,18 @@ void ALOGCharacter::Sprint(const FInputActionValue& Value)
 {
 	if (Controller != nullptr)
 	{
-		if (bSprint == false)
+		//Cast<UCharacterMovementComponent>()
+		auto* moveComp = Cast<UCharacterMovementComponent>(this);
+		if (moveComp != nullptr)
 		{
-			
+			moveComp->MaxWalkSpeed = 1200;
+			this->GetCharacterMovement()->GetMaxSpeed();
+			UE_LOG(LogTemp, Log, TEXT("MaxWalkSpeed : %f"), &moveComp->MaxWalkSpeed);
 		}
-		//UE_LOG(LogTemp, Log, TEXT("Sprint!!!!!!!!!"));
+		else
+		{
+			UE_LOG(LogTemp, Error, TEXT("moveComp == nullptr"));
+		}
 	}
 }
 
@@ -135,10 +143,6 @@ void ALOGCharacter::Crouch(const FInputActionValue& Value)
 {
 	if (Controller != nullptr)
 	{
-		if (bCrouch == false)
-		{
-			
-		}
 		//UE_LOG(LogTemp, Log, TEXT("Crouch!!!!!!!!!"));
 	}
 }
