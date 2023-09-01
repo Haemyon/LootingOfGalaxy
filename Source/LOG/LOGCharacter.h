@@ -31,6 +31,9 @@ class ALOGCharacter : public ACharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	UCameraComponent* FirstPersonCameraComponent;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
+	UCharacterMovementComponent* MovementComponent;
+
 	/** MappingContext */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
 	class UInputMappingContext* DefaultMappingContext;
@@ -42,6 +45,14 @@ class ALOGCharacter : public ACharacter
 	/** Move Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
 	class UInputAction* MoveAction;
+
+	/** Sprint Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
+	class UInputAction* SprintAction;
+
+	/** Crouch Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
+	class UInputAction* CrouchAction;
 
 	
 public:
@@ -91,12 +102,26 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Weapon)
 	bool GetHasRifle();
 
+	/** Bool for Sprint */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Input)
+	bool bSprint;
+
+	/** Bool for Crouch */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = input)
+	bool bCrouch;
+
 protected:
 	/** Called for movement input */
 	void Move(const FInputActionValue& Value);
 
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
+
+	/** Called for Sprint input */
+	void Sprint(const FInputActionValue& Value);
+
+	/** Crouch for Sprint input */
+	void Crouch(const FInputActionValue& Value);
 
 protected:
 	// APawn interface

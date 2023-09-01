@@ -22,6 +22,10 @@ ALOGCharacter::ALOGCharacter()
 
 	// Character doesnt have a rifle at start
 	bHasRifle = false;
+
+	bSprint = false;
+
+	bCrouch = false;
 	
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(55.f, 96.0f);
@@ -75,6 +79,12 @@ void ALOGCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInput
 
 		//Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ALOGCharacter::Look);
+
+		//Sprint
+		EnhancedInputComponent->BindAction(SprintAction, ETriggerEvent::Triggered, this, &ALOGCharacter::Sprint);
+
+		//Crouch
+		EnhancedInputComponent->BindAction(CrouchAction, ETriggerEvent::Triggered, this, &ALOGCharacter::Crouch);
 	}
 }
 
@@ -91,6 +101,7 @@ void ALOGCharacter::Move(const FInputActionValue& Value)
 		AddMovementInput(GetActorRightVector(), MovementVector.X);
 
 		
+		//UE_LOG(LogTemp, Log, TEXT("Movement"));
 	}
 }
 
@@ -104,6 +115,31 @@ void ALOGCharacter::Look(const FInputActionValue& Value)
 		// add yaw and pitch input to controller
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
+		//UE_LOG(LogTemp, Log, TEXT("Look"));
+	}
+}
+
+void ALOGCharacter::Sprint(const FInputActionValue& Value)
+{
+	if (Controller != nullptr)
+	{
+		if (bSprint == false)
+		{
+			
+		}
+		//UE_LOG(LogTemp, Log, TEXT("Sprint!!!!!!!!!"));
+	}
+}
+
+void ALOGCharacter::Crouch(const FInputActionValue& Value)
+{
+	if (Controller != nullptr)
+	{
+		if (bCrouch == false)
+		{
+			
+		}
+		//UE_LOG(LogTemp, Log, TEXT("Crouch!!!!!!!!!"));
 	}
 }
 
