@@ -19,15 +19,15 @@ public:
 	//스테이터스
 protected:
 	UPROPERTY(EditAnywhere)
-	float HP = 80;
+	float HP = 100;
 	UPROPERTY(EditAnywhere)
 	float MaxHP = 100;
 	UPROPERTY(EditAnywhere)
-	float SP = 80;
+	float SP = 100;
 	UPROPERTY(EditAnywhere)
 	float MaxSP = 100;
 	UPROPERTY(EditAnywhere)
-	float MP = 80;
+	float MP = 100;
 	UPROPERTY(EditAnywhere)
 	float MaxMP = 100;
 
@@ -59,6 +59,11 @@ public:
 	float GetTalentPoint() { return TalentPoint; }
 	float GetMoney() { return Money; }
 	float GetCash() { return Cash; }
+
+public:
+	void AddHP(float value) { HP = GetHP() + value; }
+	void AddSP(float value) { SP = GetSP() + value; }
+	void AddMP(float value) { MP = GetMP() + value; }
 
 
 public:	

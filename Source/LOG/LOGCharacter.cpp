@@ -19,14 +19,15 @@
 
 ALOGCharacter::ALOGCharacter()
 {
-	StatusComponent = CreateDefaultSubobject<UStatusComponent>(TEXT("StatusComponent"));
 
 	// Character doesnt have a rifle at start
 	bHasRifle = false;
 
 	bSprint = false;
+	SprintMultiply = 1.5;
 
 	bCrouch = false;
+	CrouchMultiply = 0.5;
 
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(55.f, 96.0f);
@@ -46,6 +47,7 @@ ALOGCharacter::ALOGCharacter()
 	//Mesh1P->SetRelativeRotation(FRotator(0.9f, -19.19f, 5.2f));
 	Mesh1P->SetRelativeLocation(FVector(-30.f, 0.f, -150.f));
 
+	StatusComponent = CreateDefaultSubobject<UStatusComponent>(TEXT("StatusComponent"));
 }
 
 void ALOGCharacter::BeginPlay()
@@ -124,17 +126,29 @@ void ALOGCharacter::Sprint(const FInputActionValue& Value)
 {
 	if (Controller != nullptr)
 	{
-		//Cast<UCharacterMovementComponent>()
-		auto* moveComp = Cast<UCharacterMovementComponent>(this);
-		if (moveComp != nullptr)
+		if (bCrouch == false)
 		{
-			moveComp->MaxWalkSpeed = 1200;
-			this->GetCharacterMovement()->GetMaxSpeed();
-			UE_LOG(LogTemp, Log, TEXT("MaxWalkSpeed : %f"), &moveComp->MaxWalkSpeed);
+			if (bSprint == false)
+			{
+				GetCharacterMovement()->MaxWalkSpeed *= SprintMultiply;
+				GetStatusComponent()->AddHP(-5);
+
+				float speed = GetCharacterMovement()->MaxWalkSpeed;
+				float HP = GetStatusComponent()->GetSP();
+				UE_LOG(LogTemp, Log, TEXT("MaxWalkSpeed : %f\nCurrentHP : %f"), speed, HP);
+				bSprint = true;
+			}
+			else
+			{
+				GetCharacterMovement()->MaxWalkSpeed /= SprintMultiply;
+				float speed = GetCharacterMovement()->MaxWalkSpeed;
+				UE_LOG(LogTemp, Log, TEXT("MaxWalkSpeed : %f"), speed);
+				bSprint = false;
+			}
 		}
 		else
 		{
-			UE_LOG(LogTemp, Error, TEXT("moveComp == nullptr"));
+			UE_LOG(LogTemp, Warning, TEXT("Player Doing Another Action"));
 		}
 	}
 }
@@ -143,7 +157,30 @@ void ALOGCharacter::Crouch(const FInputActionValue& Value)
 {
 	if (Controller != nullptr)
 	{
-		//UE_LOG(LogTemp, Log, TEXT("Crouch!!!!!!!!!"));
+		if (bSprint == false)
+		{
+			if (bCrouch == false)
+			{
+				UE_LOG(LogTemp, Log, TEXT("Crouch"));
+				GetCharacterMovement()->MaxWalkSpeed *= CrouchMultiply;
+				FirstPersonCameraComponent->SetRelativeLocation(FVector(-10.f, 0.f, 30.f)); // Position the camera
+				GetCapsuleComponent()->SetCapsuleHalfHeight(48.f);
+
+				bCrouch = true;
+			}
+			else
+			{
+				UE_LOG(LogTemp, Log, TEXT("UnCrouch"));
+				GetCharacterMovement()->MaxWalkSpeed /= CrouchMultiply;
+				FirstPersonCameraComponent->SetRelativeLocation(FVector(-10.f, 0.f, 60.f)); // Position the camera
+				GetCapsuleComponent()->SetCapsuleSize(55.f, 96.f);
+				bCrouch = false;
+			}
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Player Doing Another Action"));
+		}
 	}
 }
 

@@ -105,10 +105,14 @@ public:
 	/** Bool for Sprint */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Input)
 	bool bSprint;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Input)
+	float SprintMultiply;
 
 	/** Bool for Crouch */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = input)
 	bool bCrouch;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = input)
+	float CrouchMultiply;
 
 protected:
 	/** Called for movement input */
