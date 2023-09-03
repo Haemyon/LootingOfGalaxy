@@ -2,6 +2,8 @@
 
 #include "LOGProjectile.h"
 #include "GameFramework/ProjectileMovementComponent.h"
+#include "LOG/LOGCharacter.h"
+#include "Engine/DamageEvents.h"
 #include "Components/SphereComponent.h"
 
 ALOGProjectile::ALOGProjectile() 
@@ -26,7 +28,7 @@ ALOGProjectile::ALOGProjectile()
 	ProjectileMovement->MaxSpeed = 10000.f;
 	ProjectileMovement->bRotationFollowsVelocity = true;
 	ProjectileMovement->bShouldBounce = true;
-
+	
 	// Die after 3 seconds by default
 	InitialLifeSpan = 3.0f;
 }
@@ -34,9 +36,9 @@ ALOGProjectile::ALOGProjectile()
 void ALOGProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
 	// Only add impulse and destroy projectile if we hit a physics
-	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherComp->IsSimulatingPhysics())
+	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr))
 	{
-		OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
+		OtherActor->TakeDamage(10.f, FDamageEvent(), nullptr, nullptr);
 
 		Destroy();
 	}

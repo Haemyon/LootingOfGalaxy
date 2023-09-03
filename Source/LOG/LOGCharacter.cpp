@@ -11,6 +11,9 @@
 #include "LOG/00_Character/00_Component/StatusComponent.h"
 #include "LOG/00_Character/LOGPlayerController.h"
 #include "LOG/00_Character/01_Widget/MainWidget.h"
+#include "LOG/02_Widget/DamageTextWidget.h"
+#include "LOG/02_Widget/HealthBarWidget.h"
+#include "Components/WidgetComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 
@@ -48,6 +51,12 @@ ALOGCharacter::ALOGCharacter()
 	Mesh1P->SetRelativeLocation(FVector(-30.f, 0.f, -150.f));
 
 	StatusComponent = CreateDefaultSubobject<UStatusComponent>(TEXT("StatusComponent"));
+
+	HealthBarWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("HealthBarWidgetComponent"));
+	HealthBarWidgetComponent->SetupAttachment(RootComponent);
+	
+	HealthBarWidgetComponent->SetWidgetSpace(EWidgetSpace::Screen);
+	HealthBarWidgetComponent->SetDrawSize(FVector2D(150, 15));
 }
 
 void ALOGCharacter::BeginPlay()
@@ -89,6 +98,34 @@ void ALOGCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInput
 		//Crouch
 		EnhancedInputComponent->BindAction(CrouchAction, ETriggerEvent::Triggered, this, &ALOGCharacter::Crouch);
 	}
+}
+
+float ALOGCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+	FHitResult Hit;
+	StatusComponent->AddHP((-1) * DamageAmount);
+	UE_LOG(LogTemp, Log, TEXT("HP : %f"), StatusComponent->GetHP());
+
+	if (DamageTextWidgetComponentObject != nullptr)
+	{
+		UE_LOG(LogTemp, Log, TEXT("DamageTextWidgetComponentObject"));
+		UWidgetComponent* widgetComp = NewObject<UWidgetComponent>(this, DamageTextWidgetComponentObject);
+		if (widgetComp != nullptr)
+		{
+			UE_LOG(LogTemp, Log, TEXT("widgetComp"));
+			widgetComp->RegisterComponent();
+			widgetComp->SetWorldLocation(Hit.Location);
+	
+			UDamageTextWidget* widget = Cast<UDamageTextWidget>(widgetComp->GetUserWidgetObject());
+			if (widget != nullptr)
+			{
+				UE_LOG(LogTemp, Log, TEXT("widget"));
+				widget->SetDamageText(DamageAmount);
+			}
+		}
+	}
+
+	return Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
 }
 
 

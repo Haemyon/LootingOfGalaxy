@@ -138,5 +138,13 @@ public:
 	/** Returns FirstPersonCameraComponent subobject **/
 	UCameraComponent* GetFirstPersonCameraComponent() const { return FirstPersonCameraComponent; }
 
+	UPROPERTY(EditAnywhere)
+	class UWidgetComponent* HealthBarWidgetComponent;
+	
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class UWidgetComponent> DamageTextWidgetComponentObject;
+
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
+
 };
 
