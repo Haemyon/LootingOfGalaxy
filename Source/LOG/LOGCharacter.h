@@ -7,10 +7,6 @@
 #include "InputActionValue.h"
 #include "LOGCharacter.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangedHP, class UStatusComponent*, statComp);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangedSP, class UStatusComponent*, statComp);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangedMP, class UStatusComponent*, statComp);
-
 class UInputComponent;
 class USkeletalMeshComponent;
 class USceneComponent;
@@ -54,24 +50,8 @@ class ALOGCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
 	class UInputAction* CrouchAction;
 
-	
 public:
 	ALOGCharacter();
-
-	UPROPERTY(BlueprintAssignable)
-	FOnChangedHP OnChangedHP;
-	UPROPERTY(BlueprintAssignable)
-	FOnChangedHP OnChangedSP;
-	UPROPERTY(BlueprintAssignable)
-	FOnChangedHP OnChangedMP;
-
-protected:
-	UFUNCTION()
-	virtual void OnChangedHPEvent(class UStatusComponent* statComp) {}
-	UFUNCTION()
-	virtual void OnChangedSPEvent(class UStatusComponent* statComp) {}
-	UFUNCTION()
-	virtual void OnChangedMPEvent(class UStatusComponent* statComp) {}
 
 public:
 
@@ -137,13 +117,7 @@ public:
 	USkeletalMeshComponent* GetMesh1P() const { return Mesh1P; }
 	/** Returns FirstPersonCameraComponent subobject **/
 	UCameraComponent* GetFirstPersonCameraComponent() const { return FirstPersonCameraComponent; }
-
-	UPROPERTY(EditAnywhere)
-	class UWidgetComponent* HealthBarWidgetComponent;
 	
-	UPROPERTY(EditAnywhere)
-	TSubclassOf<class UWidgetComponent> DamageTextWidgetComponentObject;
-
 	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
 
 };

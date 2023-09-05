@@ -3,6 +3,9 @@
 
 #include "LOG/00_Character/00_Component/StatusComponent.h"
 
+#include "LOG/LOGCharacter.h"
+#include "LOG/00_Character/BaseCharacter.h"
+
 // Sets default values for this component's properties
 UStatusComponent::UStatusComponent()
 {
@@ -21,6 +24,20 @@ void UStatusComponent::BeginPlay()
 
 	// ...
 	
+}
+
+void UStatusComponent::AddHP(float value)
+{
+	HP = FMath::Clamp(HP + value, 0.f, MaxHP);
+	GetOwner<ABaseCharacter>()->OnChangedHP.Broadcast(this);
+}
+
+void UStatusComponent::AddSP(float value)
+{
+}
+
+void UStatusComponent::AddMP(float value)
+{
 }
 
 // Called every frame

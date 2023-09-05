@@ -52,11 +52,6 @@ ALOGCharacter::ALOGCharacter()
 
 	StatusComponent = CreateDefaultSubobject<UStatusComponent>(TEXT("StatusComponent"));
 
-	HealthBarWidgetComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("HealthBarWidgetComponent"));
-	HealthBarWidgetComponent->SetupAttachment(RootComponent);
-	
-	HealthBarWidgetComponent->SetWidgetSpace(EWidgetSpace::Screen);
-	HealthBarWidgetComponent->SetDrawSize(FVector2D(150, 15));
 }
 
 void ALOGCharacter::BeginPlay()
@@ -97,6 +92,7 @@ void ALOGCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInput
 
 		//Crouch
 		EnhancedInputComponent->BindAction(CrouchAction, ETriggerEvent::Triggered, this, &ALOGCharacter::Crouch);
+
 	}
 }
 
@@ -105,25 +101,6 @@ float ALOGCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEv
 	FHitResult Hit;
 	StatusComponent->AddHP((-1) * DamageAmount);
 	UE_LOG(LogTemp, Log, TEXT("HP : %f"), StatusComponent->GetHP());
-
-	if (DamageTextWidgetComponentObject != nullptr)
-	{
-		UE_LOG(LogTemp, Log, TEXT("DamageTextWidgetComponentObject"));
-		UWidgetComponent* widgetComp = NewObject<UWidgetComponent>(this, DamageTextWidgetComponentObject);
-		if (widgetComp != nullptr)
-		{
-			UE_LOG(LogTemp, Log, TEXT("widgetComp"));
-			widgetComp->RegisterComponent();
-			widgetComp->SetWorldLocation(Hit.Location);
-	
-			UDamageTextWidget* widget = Cast<UDamageTextWidget>(widgetComp->GetUserWidgetObject());
-			if (widget != nullptr)
-			{
-				UE_LOG(LogTemp, Log, TEXT("widget"));
-				widget->SetDamageText(DamageAmount);
-			}
-		}
-	}
 
 	return Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
 }
@@ -168,7 +145,6 @@ void ALOGCharacter::Sprint(const FInputActionValue& Value)
 			if (bSprint == false)
 			{
 				GetCharacterMovement()->MaxWalkSpeed *= SprintMultiply;
-				GetStatusComponent()->AddHP(-5);
 
 				float speed = GetCharacterMovement()->MaxWalkSpeed;
 				float HP = GetStatusComponent()->GetSP();

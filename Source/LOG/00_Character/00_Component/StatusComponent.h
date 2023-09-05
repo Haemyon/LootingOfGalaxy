@@ -61,14 +61,13 @@ public:
 	float GetCash() { return Cash; }
 
 public:
-	void AddHP(float value) { HP = GetHP() + value; }
-	void AddSP(float value) { SP = GetSP() + value; }
-	void AddMP(float value) { MP = GetMP() + value; }
+	void AddHP(float value);
+	void AddSP(float value);
+	void AddMP(float value);
 
 
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
 		
 };
