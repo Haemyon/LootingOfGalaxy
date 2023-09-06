@@ -77,13 +77,6 @@ float ABaseCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageE
 	//2. 남은 체력을 로그로 찍음.
 	UE_LOG(LogTemp, Log, TEXT("HP : %f"), StatusComponent->GetHP());
 	
-	//체력이 0이하라면,
-	if (StatusComponent->GetHP() <= 0.f)
-	{
-		//사망처리를 합니다.
-		OnDead.Broadcast(EventInstigator->GetPawn());
-		return Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
-	}
 
 	HealthBarWidgetComponent->SetVisibility(true);
 	
@@ -97,6 +90,12 @@ float ABaseCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageE
 		&UWidgetComponent::SetVisibility, false, false);
 	GetWorldTimerManager().SetTimer(HealthBarWidgetVisibleTimerHandle, VisibleTimerDel, 3.f, false);
 	
+	//체력이 0이하라면,
+	if (StatusComponent->GetHP() <= 0.f)
+	{
+		//사망처리를 합니다.
+		OnDead.Broadcast(EventInstigator);
+	}
 	
 
 	return Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);

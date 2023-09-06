@@ -96,14 +96,14 @@ void ALOGCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInput
 	}
 }
 
-float ALOGCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
-{
-	FHitResult Hit;
-	StatusComponent->AddHP((-1) * DamageAmount);
-	UE_LOG(LogTemp, Log, TEXT("HP : %f"), StatusComponent->GetHP());
-
-	return Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
-}
+//float ALOGCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+//{
+//	FHitResult Hit;
+//	StatusComponent->AddHP((-1) * DamageAmount);
+//	UE_LOG(LogTemp, Log, TEXT("HP : %f"), StatusComponent->GetHP());
+//
+//	return Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+//}
 
 
 void ALOGCharacter::Move(const FInputActionValue& Value)

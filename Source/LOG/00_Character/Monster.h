@@ -39,8 +39,8 @@ public:
 	FGenericDropItem() {}
 	FGenericDropItem(const FDropItem* Item)
 	{
-		//this->itemToDrop = Item->itemToDrop;
-		//this->percent = Item->percent;
+		this->itemToDrop = Item->itemToDrop;
+		this->percent = Item->percent;
 	}
 };
 
@@ -83,12 +83,12 @@ protected:
  * @param List 테이블에 저장된 아이템들
  * @return 정상이면 참, 비정상이면 거짓
  */
-	//bool CheckDropTablePercentIsOver(const TArray<FDropItem*> List);
+	bool CheckDropTablePercentIsOver(const TArray<FDropItem*> List);
 
 	//아이템 드롭 테이블에서 값을 읽어와 세팅합니다.
-	//virtual void InitDropItems();
+	virtual void InitDropItems();
 
 	//아이템을 드롭합니다.
-	//virtual void DropItem();
+	virtual void DropItem();
 
 };
