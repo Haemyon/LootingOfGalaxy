@@ -20,17 +20,12 @@ public:
 	class UProgressBar* ProgressBar_SP;
 	UPROPERTY()
 	class UProgressBar* ProgressBar_MP;
-	UPROPERTY()
-	class UProgressBar* ProgressBar_TEST;
 
 	void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
 
 public:
-	UFUNCTION()
 	void UpdateProgressHP(class UStatusComponent* statComp);
-	UFUNCTION()
 	void UpdateProgressSP(class UStatusComponent* statComp);
-	UFUNCTION()
 	void UpdateProgressMP(class UStatusComponent* statComp);
 
 };

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "ItemTypes.h"
 #include "Engine/DataTable.h"
 #include "ItemActor.generated.h"
 
@@ -39,8 +40,8 @@ protected:
 	class UDataTable* Item_Table;
 
 	///아이템 공통 정보가 들어있는 구조체
-	//UPROPERTY(VisibleAnywhere)
-	//FGenericItemInformation GenericItemInformation;
+	UPROPERTY(VisibleAnywhere)
+	FGenericItemInformation GenericItemInformation;
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -64,7 +65,7 @@ protected:
 public:	
 	UWidgetComponent* GetWidgetComponent() const { return WidgetComponent; }
 	FName GetItem_Code() const { return Item_Code; }
-	//FGenericItemInformation& GetGenericItemInformation() const { return GenericItemInformation; }
+	const FGenericItemInformation& GetGenericItemInformation() const { return GenericItemInformation; }
 
 	/**
 	 * @brief 대상에게 아이템 효과를 적용합니다. 아이템 종류별로 재 정의해서 기능을 구현합니다.

@@ -25,7 +25,6 @@ AItemActor::AItemActor()
 
 	SphereComponent->SetCollisionProfileName("ItemPreset");
 	SphereComponent->SetSimulatePhysics(true);
-
 }
 
 // Called when the game starts or when spawned
@@ -55,19 +54,19 @@ void AItemActor::InitItemInformation()
 {
 	if (Item_Table != nullptr)
 	{
-		//const auto info = GetItemInformation<FItemInformation>();
-		//if (info != nullptr)
+		const auto info = GetItemInformation<FItemInformation>();
+		if (info != nullptr)
 		{
-			//GenericItemInformation.ItemActorObject = info->ItemActorObject;
-			//GenericItemInformation.Item_Code = info->Item_Code;
-			//GenericItemInformation.Item_Description = info->Item_Description;
-			//GenericItemInformation.Item_Description_Long = info->Item_Description_Long;
-			//GenericItemInformation.Item_Image = info->Item_Image;
-			//GenericItemInformation.Item_Name = info->Item_Name;
-			//GenericItemInformation.Item_Price = info->Item_Price;
-			//GenericItemInformation.Item_Type = info->Item_Type;
-			//
-			//GenericItemInformation.Item_Count = Item_Count;
+			GenericItemInformation.ItemActorObject = info->ItemActorObject;
+			GenericItemInformation.Item_Code = info->Item_Code;
+			GenericItemInformation.Item_Description = info->Item_Description;
+			GenericItemInformation.Item_Description_Long = info->Item_Description_Long;
+			GenericItemInformation.Item_Image = info->Item_Image;
+			GenericItemInformation.Item_Name = info->Item_Name;
+			GenericItemInformation.Item_Price = info->Item_Price;
+			GenericItemInformation.Item_Type = info->Item_Type;
+			
+			GenericItemInformation.Item_Count = Item_Count;
 		}
 	}
 }
