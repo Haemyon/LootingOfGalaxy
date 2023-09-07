@@ -6,6 +6,7 @@
 #include "LOG//00_Character/BaseCharacter.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/WidgetComponent.h"
+#include "Engine/DamageEvents.h"
 
 #include "LOG/02_Widget/HealthBarWidget.h"
 
@@ -54,6 +55,9 @@ void AMonster::BeginPlay()
 float AMonster::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
 {
 	FHitResult Hit;
+	FVector OutImpulseDir;
+	DamageEvent.GetBestHitInfo(this, DamageCauser, Hit, OutImpulseDir);
+
 	return Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
 }
 

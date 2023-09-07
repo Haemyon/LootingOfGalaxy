@@ -14,6 +14,7 @@ class LOG_API UDamageTextWidget : public UUserWidget
 {
 	GENERATED_BODY()
 protected:
+	UPROPERTY()
 	class UTextBlock* TextBlock_Damage;
 
 public:

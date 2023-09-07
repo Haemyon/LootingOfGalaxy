@@ -7,6 +7,7 @@
 #include "LOG/02_Widget/DamageTextWidget.h"
 #include "Components/WidgetComponent.h"
 #include "Engine/EngineTypes.h"
+#include "Engine/DamageEvents.h"
 #include "BaseCharacter.h"
 
 // Sets default values
@@ -50,9 +51,9 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 float ABaseCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
 {
 	FHitResult Hit;
-	//FVector OutImpulseDir;
-	//DamageEvent.GetBestHitInfo(this, DamageCauser, Hit, OutImpulseDir);
-	//
+	FVector OutImpulseDir;
+	DamageEvent.GetBestHitInfo(this, DamageCauser, Hit, OutImpulseDir);
+	
 	if (DamageTextWidgetComponentObject != nullptr)
 	{
 	

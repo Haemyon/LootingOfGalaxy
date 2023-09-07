@@ -7,5 +7,9 @@
 
 void UDamageTextWidget::SetDamageText(const float Damage)
 {
-	TextBlock_Damage->SetText(FText::AsNumber(Damage));
+	if (TextBlock_Damage != nullptr)
+	{
+		TextBlock_Damage->SetText(FText::AsNumber(Damage));
+		UE_LOG(LogTemp, Error, TEXT("Damage : %f"), Damage);
+	}
 }
