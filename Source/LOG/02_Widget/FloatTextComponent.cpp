@@ -23,5 +23,6 @@ void UFloatTextComponent::OnSphereBeginOverlap(UPrimitiveComponent* OverlappedCo
 	{
 		// Notify that the actor is being picked up
 		OnFloatText.Broadcast(Character);
+		UE_LOG(LogTemp, Error, TEXT("Float Text Component Overlaped"));
 	}
 }
