@@ -29,7 +29,14 @@ void UStatusComponent::BeginPlay()
 void UStatusComponent::AddHP(float value)
 {
 	HP = FMath::Clamp(HP + value, 0.f, MaxHP);
-	GetOwner<ABaseCharacter>()->OnChangedHP.Broadcast(this);
+	if (GetOwner()->IsA<ABaseCharacter>())
+	{
+		GetOwner<ABaseCharacter>()->OnChangedHP.Broadcast(this);
+	}
+	if (GetOwner()->IsA<ALOGCharacter>())
+	{
+		//GetOwner<ALOGCharacter>()->OnChangedHP.Broadcast(this);
+	}
 }
 
 void UStatusComponent::AddSP(float value)

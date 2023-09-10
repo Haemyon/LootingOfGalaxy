@@ -7,6 +7,13 @@
 #include "InputActionValue.h"
 #include "LOGCharacter.generated.h"
 
+//체력이 변하면 사용되는 델리게이트 정의
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangedHP, class UStatusComponent*, statComp);
+//실드가 변하면 사용되는 델리게이트 정의
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangedSP, class UStatusComponent*, statComp);
+//마나가 변하면 사용되는 델리게이트 정의
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangedMP, class UStatusComponent*, statComp);
+
 class UInputComponent;
 class USkeletalMeshComponent;
 class USceneComponent;
@@ -52,6 +59,26 @@ class ALOGCharacter : public ACharacter
 
 public:
 	ALOGCharacter();
+
+	//캐릭터의 체력상황이 변하면 실행되는 델리게이트
+	UPROPERTY(BlueprintAssignable)
+	FOnChangedHP OnChangedHP;
+	//캐릭터의 실드상황이 변하면 실행되는 델리게이트
+	UPROPERTY(BlueprintAssignable)
+	FOnChangedSP OnChangedSP;
+	//캐릭터의 마나상황이 변하면 실행되는 델리게이트
+	UPROPERTY(BlueprintAssignable)
+	FOnChangedMP OnChangedMP;
+	
+protected:
+	UFUNCTION()
+	virtual void OnChangedHPEvent(class UStatusComponent* statComp) { }
+	UFUNCTION()
+	virtual void OnChangedSPEvent(class UStatusComponent* statComp) { }
+	UFUNCTION()
+	virtual void OnChangedMPEvent(class UStatusComponent* statComp) { }
+
+
 
 public:
 
