@@ -8,11 +8,11 @@
 #include "LOGCharacter.generated.h"
 
 //체력이 변하면 사용되는 델리게이트 정의
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangedHP, class UStatusComponent*, statComp);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerChangedHP, class UStatusComponent*, statComp);
 //실드가 변하면 사용되는 델리게이트 정의
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangedSP, class UStatusComponent*, statComp);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerChangedSP, class UStatusComponent*, statComp);
 //마나가 변하면 사용되는 델리게이트 정의
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangedMP, class UStatusComponent*, statComp);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlayerChangedMP, class UStatusComponent*, statComp);
 
 class UInputComponent;
 class USkeletalMeshComponent;
@@ -62,24 +62,14 @@ public:
 
 	//캐릭터의 체력상황이 변하면 실행되는 델리게이트
 	UPROPERTY(BlueprintAssignable)
-	FOnChangedHP OnChangedHP;
+	FPlayerChangedHP PlayerChangedHP;
 	//캐릭터의 실드상황이 변하면 실행되는 델리게이트
 	UPROPERTY(BlueprintAssignable)
-	FOnChangedSP OnChangedSP;
+	FPlayerChangedSP PlayerChangedSP;
 	//캐릭터의 마나상황이 변하면 실행되는 델리게이트
 	UPROPERTY(BlueprintAssignable)
-	FOnChangedMP OnChangedMP;
+	FPlayerChangedMP PlayerChangedMP;
 	
-protected:
-	UFUNCTION()
-	virtual void OnChangedHPEvent(class UStatusComponent* statComp) { }
-	UFUNCTION()
-	virtual void OnChangedSPEvent(class UStatusComponent* statComp) { }
-	UFUNCTION()
-	virtual void OnChangedMPEvent(class UStatusComponent* statComp) { }
-
-
-
 public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)

@@ -35,7 +35,7 @@ void UStatusComponent::AddHP(float value)
 	}
 	if (GetOwner()->IsA<ALOGCharacter>())
 	{
-		//GetOwner<ALOGCharacter>()->OnChangedHP.Broadcast(this);
+		GetOwner<ALOGCharacter>()->PlayerChangedHP.Broadcast(this);
 	}
 }
 

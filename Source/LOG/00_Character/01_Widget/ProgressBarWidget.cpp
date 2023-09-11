@@ -30,18 +30,20 @@ void UProgressBarWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTi
 void UProgressBarWidget::UpdateProgressHP(UStatusComponent* statComp)
 {
 	float per = statComp->GetHP() / statComp->GetMaxHP();
-	UE_LOG(LogTemp, Log, TEXT("Set HP"));
-	ProgressBar_HP->SetPercent(0);
+	UE_LOG(LogTemp, Log, TEXT("Set HP : %f"), per);
+	//ProgressBar_HP->SetPercent(per);
 }
 
 void UProgressBarWidget::UpdateProgressSP(UStatusComponent* statComp)
 {
 	float per = statComp->GetSP() / statComp->GetMaxSP();
-	ProgressBar_SP->SetPercent(per);
+	UE_LOG(LogTemp, Log, TEXT("Set SP : %f"), per);
+	//ProgressBar_SP->SetPercent(1);
 }
 
 void UProgressBarWidget::UpdateProgressMP(UStatusComponent* statComp)
 {
 	float per = statComp->GetMP() / statComp->GetMaxMP();
-	ProgressBar_SP->SetPercent(per);
+	UE_LOG(LogTemp, Log, TEXT("Set MP : %f"), per);
+	//ProgressBar_SP->SetPercent(per);
 }

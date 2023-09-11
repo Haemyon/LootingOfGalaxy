@@ -21,6 +21,9 @@ public:
 	UPROPERTY(BlueprintAssignable, Category = "interaction")
 	FOnDamageFloor OnDamageFloor;
 
+	UPROPERTY(EditAnywhere)
+	float DamageAmount = 0;
+
 	UDamageBoxComponent();
 
 protected:

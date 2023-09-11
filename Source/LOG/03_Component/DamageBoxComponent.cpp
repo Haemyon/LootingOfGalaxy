@@ -26,15 +26,16 @@ void UDamageBoxComponent::OnSphereBeginOverlap(UPrimitiveComponent* OverlappedCo
 		// Notify that the actor is being picked up
 		OnDamageFloor.Broadcast(Character);
 		UE_LOG(LogTemp, Error, TEXT("Damage Box Component Overlaped"));
-		//auto StatusComp = Character->GetStatusComponent();
-		//if (StatusComp != nullptr)
-		//{
-		//	Character->GetStatusComponent()->AddHP(-20);
-		//}
-		//else
-		//{
-		//	UE_LOG(LogTemp, Error, TEXT("StatusComp == nullptr"));
-		//}
+		auto StatusComp = Character->GetStatusComponent();
+		if (StatusComp != nullptr)
+		{
+			Character->GetStatusComponent()->AddHP(DamageAmount);
+			UE_LOG(LogTemp, Error, TEXT("Damaged : %f"), DamageAmount);
+		}
+		else
+		{
+			UE_LOG(LogTemp, Error, TEXT("StatusComp == nullptr"));
+		}
 	}
 }
 

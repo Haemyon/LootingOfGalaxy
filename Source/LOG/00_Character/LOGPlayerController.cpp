@@ -27,6 +27,14 @@ void ALOGPlayerController::OnPossess(APawn* aPawn)
 			if (player != nullptr)
 			{
 				UE_LOG(LogTemp, Warning, TEXT("Set player"));
+
+				player->PlayerChangedHP.AddUniqueDynamic(MainWidget, &UMainWidget::UpdateHPPercent);
+				player->PlayerChangedSP.AddUniqueDynamic(MainWidget, &UMainWidget::UpdateSPPercent);
+				player->PlayerChangedMP.AddUniqueDynamic(MainWidget, &UMainWidget::UpdateMPPercent);
+
+				player->PlayerChangedHP.Broadcast(player->GetStatusComponent());
+				player->PlayerChangedSP.Broadcast(player->GetStatusComponent());
+				player->PlayerChangedMP.Broadcast(player->GetStatusComponent());
 			}
 		}
 		else {
