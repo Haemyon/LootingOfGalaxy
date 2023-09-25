@@ -65,6 +65,17 @@ void ALOGCharacter::BeginPlay()
 		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
 		{
 			Subsystem->AddMappingContext(DefaultMappingContext, 0);
+
+			auto arr = Subsystem->GetAllPlayerMappableActionKeyMappings();
+			if (arr.IsEmpty())
+			{
+				UE_LOG(LogTemp, Warning, TEXT("arr is Empty"));
+			}
+			for (int i = 0; i < arr.Num(); i++)
+			{
+				auto name = arr[i].GetMappingName();
+				UE_LOG(LogTemp, Warning, TEXT("Name : %f"), i);
+			}
 		}
 	}
 

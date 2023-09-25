@@ -14,7 +14,6 @@
 UENUM(BlueprintType)
 enum class EItemType : uint8
 {
-	CONSUME,
 	EQUIPMENT,
 	ETC
 };
@@ -122,13 +121,6 @@ public:
 	float ActionSpeed;
 
 	UPROPERTY(EditAnywhere)
-	int32 Str;
-	UPROPERTY(EditAnywhere)
-	int32 Dex;
-	UPROPERTY(EditAnywhere)
-	int32 Wiz;
-
-	UPROPERTY(EditAnywhere)
 	float MaxHP;
 	UPROPERTY(EditAnywhere)
 	float MaxMP;
@@ -146,12 +138,12 @@ enum class EWeaponType : uint8
 	MACHINGUN,
 	MOBILEGRENADELUNCHER,
 	PISTOL,
-	RIPLE,
+	RIFLE,
 	ROCKETLUNCHER,
-	SCOUTRIPLE,
+	SCOUTRIFLE,
 	SHOTGUN,
 	SUBMACHINGUN,
-	SNIPERRIPLE
+	SNIPERRIFLE
 };
 
 USTRUCT(BlueprintType)
@@ -183,9 +175,11 @@ public:
 	EWeaponType WeaponType;
 
 	UPROPERTY(EditAnywhere)
-	float RollSP;
+	float MaxAmmo;
 	UPROPERTY(EditAnywhere)
-	float AttackSP;
+	float CurrentAmmo;
+	UPROPERTY(EditAnywhere)
+	float TotalAmmo;
 
 	FWeapon()
 	{
@@ -279,39 +273,12 @@ public:
 };
 
 UENUM(BlueprintType)
-enum class EConsumeType : uint8
+enum class EEtcType : uint8
 {
-	POTION,
+	QUEST,
+	CASH,
+	MONEY,
 	ETC
-};
-
-USTRUCT(BlueprintType)
-struct FConsume : public FItemInformation
-{
-	GENERATED_BODY()
-public:
-	UPROPERTY(EditAnywhere)
-	EConsumeType ConsumeType;
-	UPROPERTY(EditAnywhere)
-	class UAnimMontage* UseMontage;
-	UPROPERTY(EditAnywhere)
-	class UNiagaraSystem* UseParticle;
-	UPROPERTY(EditAnywhere)
-	class USoundBase* UseSound;
-};
-
-USTRUCT(BlueprintType)
-struct FPotion : public FConsume
-{
-	GENERATED_BODY()
-public:
-	UPROPERTY(EditAnywhere)
-	float RecoverHP;
-	UPROPERTY(EditAnywhere)
-	float RecoverMP;
-	UPROPERTY(EditAnywhere)
-	float RecoverSP;
-
 };
 
 UCLASS()
